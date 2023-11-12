@@ -7,6 +7,7 @@ import {
     faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import SidebarChatList from './SidebarChatList';
 
 const Sidebar = () => {
     const [isSearchFocused, setIsSearchFocused] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const Sidebar = () => {
 
     return (
         <nav className="h-[100vh] w-[25vw]">
-            <div className="h-full bg-background">
+            <div className="flex flex-col h-full bg-background">
                 <div className="flex pt-[6px] pb-2 px-[13px] text-secondary">
                     <div
                         id="sidebar-header-btn"
@@ -58,7 +59,9 @@ const Sidebar = () => {
                         </span>
                     </div>
                 </div>
-                <div></div>
+                <div className="flex-1 overflow-hidden">
+                    <SidebarChatList />
+                </div>
             </div>
         </nav>
     );

@@ -5,7 +5,7 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/Sidebar/Sidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,7 +29,9 @@ export default function RootLayout({
                     type="image/svg+xml"
                 ></link>
             </head>
-            <body className={inter.className}>
+            <body
+                className={`${inter.className} flex w-full h-full overflow-hidden`}
+            >
                 <Sidebar />
                 {children}
             </body>

@@ -23,6 +23,12 @@ const config: Config = {
             caretColor: {
                 primary: 'var(--color-text-primary)',
             },
+            backgroundImage: {
+                'background-pattern': "url('/telegram_background.png')",
+            },
+            width: {
+                'chat-item-info-width': 'calc(100% - 54px - 8px)',
+            },
         },
     },
     plugins: [],
