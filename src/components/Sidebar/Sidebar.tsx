@@ -21,7 +21,7 @@ const Sidebar = () => {
     };
 
     return (
-        <nav className="h-[100vh] w-[25vw]">
+        <nav className="h-[100vh] w-[25vw] border-r-[1px] border-r-secondary">
             <div className="flex flex-col h-full bg-background">
                 <div className="flex pt-[6px] pb-2 px-[13px] text-secondary">
                     <div
@@ -34,14 +34,14 @@ const Sidebar = () => {
                     >
                         {!isSearchFocused ? (
                             <button
-                                className="h-10 w-10 text-lg rounded-full transition-all hover:bg-hover"
+                                className="button"
                                 onClick={handleSearchBlurred}
                             >
                                 <FontAwesomeIcon icon={faBars} />
                             </button>
                         ) : (
                             <button
-                                className="h-10 w-10 text-lg rounded-full transition-all hover:bg-hover"
+                                className="button"
                                 onClick={handleSearchBlurred}
                             >
                                 <FontAwesomeIcon icon={faArrowLeft} />

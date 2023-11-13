@@ -12,6 +12,7 @@ const config: Config = {
                 theme: 'var(--theme-background-color)',
                 background: 'var(--background-color)',
                 hover: 'var(--background-color-hover)',
+                primary: 'var(--background-color-primary)',
             },
             colors: {
                 primary: 'var(--color-text-primary)',
@@ -28,6 +29,9 @@ const config: Config = {
             },
             width: {
                 'chat-item-info-width': 'calc(100% - 54px - 8px)',
+            },
+            borderColor: {
+                secondary: 'var(--background-color-hover)',
             },
         },
     },

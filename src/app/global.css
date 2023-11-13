@@ -8,7 +8,11 @@
     }
 
     .background {
-        @apply relative bg-theme w-[75vw] h-[100vh] text-white after:absolute after:top-0 after:left-0 after:block after:w-full after:h-full after:bg-repeat after:bg-contain after:bg-background-pattern;
+        @apply relative bg-theme w-[75vw] h-[100vh] text-white before:absolute before:top-0 before:left-0 before:block before:w-full before:h-full before:bg-repeat before:bg-contain before:bg-background-pattern;
+    }
+
+    .button {
+        @apply h-10 w-10 text-lg text-secondary rounded-full transition-all hover:bg-hover;
     }
 }
 
@@ -17,6 +21,7 @@
     --theme-background-color: #0f0f0f;
     --background-color: #212121;
     --background-color-hover: #2c2c2c;
+    --background-color-primary: #8774e1;
 
     /* Text color */
     --color-text-primary: #8774e1;
