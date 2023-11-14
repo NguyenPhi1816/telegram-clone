@@ -1,17 +1,19 @@
 import Link from 'next/link';
 
-interface ChatItemData {
+interface ChatItemDataType {
     id: number;
 }
 
-const SidebarChatItem = ({
+interface SidebarChatItemProps {
+    data: ChatItemDataType;
+    isSelected: boolean;
+    isUnread: boolean;
+}
+
+const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
     data,
     isSelected,
     isUnread,
-}: {
-    data: ChatItemData;
-    isSelected: boolean;
-    isUnread: boolean;
 }) => {
     return (
         <Link href={`${data.id}`} className="block">
