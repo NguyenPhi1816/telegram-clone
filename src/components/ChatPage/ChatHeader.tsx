@@ -1,10 +1,20 @@
+'use client';
 import {
     faEllipsisVertical,
     faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tooltip from '../Tooltip/Tooltip';
+import ChatPageTooltipMenu from './ChatPageTooltipMenu';
+import { useState } from 'react';
 
 const ChatHeader = () => {
+    const [isShowTooltipMenu, setIsShowTooltipMenu] = useState<boolean>(false);
+
+    const handleToggleTooltipMenu = (): void => {
+        setIsShowTooltipMenu((prev) => !prev);
+    };
+
     return (
         <div className="flex py-1 pl-[23px] pr-[13px] bg-background">
             <div className="flex-1 flex items-center justify-start">
@@ -23,9 +33,27 @@ const ChatHeader = () => {
                 <button className="button">
                     <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
-                <button className="button">
-                    <FontAwesomeIcon icon={faEllipsisVertical} />
-                </button>
+                <Tooltip
+                    isShow={isShowTooltipMenu}
+                    TippyBox={<ChatPageTooltipMenu />}
+                    onClickOutside={handleToggleTooltipMenu}
+                    className="mr-[10px] mt-[7px] min-w-[13.5rem]"
+                >
+                    <button
+                        className="button"
+                        style={
+                            isShowTooltipMenu
+                                ? {
+                                      backgroundColor:
+                                          'var(--background-color-hover)',
+                                  }
+                                : {}
+                        }
+                        onClick={handleToggleTooltipMenu}
+                    >
+                        <FontAwesomeIcon icon={faEllipsisVertical} />
+                    </button>
+                </Tooltip>
             </div>
         </div>
     );

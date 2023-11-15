@@ -13,6 +13,7 @@ const config: Config = {
                 background: 'var(--background-color)',
                 hover: 'var(--background-color-hover)',
                 primary: 'var(--background-color-primary)',
+                tooltipMenu: 'var(--background-color-tooltip-menu)',
             },
             colors: {
                 primary: 'var(--color-text-primary)',
@@ -35,7 +36,12 @@ const config: Config = {
                 'conversation-max-height': 'calc(100vh - 56px - 84px)',
             },
             borderColor: {
-                secondary: 'var(--background-color-hover)',
+                primary: 'var(--background-color-primary)',
+                secondary: 'var(--border-color-default)',
+            },
+            boxShadow: {
+                default:
+                    '0 0.25rem 0.5rem 0.125rem var(--color-default-shadow)',
             },
         },
     },

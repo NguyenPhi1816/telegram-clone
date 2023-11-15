@@ -26,11 +26,18 @@
     --background-color: #212121;
     --background-color-hover: #2c2c2c;
     --background-color-primary: #8774e1;
+    --background-color-tooltip-menu: #212121dd;
 
     /* Text color */
     --color-text-primary: #8774e1;
     --color-text-secondary: #aaaaaa;
     --color-message-meta-own: #ffffff88;
+
+    /* box shadow */
+    --color-default-shadow: rgb(16, 16, 16, 0.612);
+
+    /* border color */
+    --border-color-default: #434343;
 }
 
 * {
