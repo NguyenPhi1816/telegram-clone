@@ -14,6 +14,10 @@
     .button {
         @apply h-10 w-10 text-lg text-secondary rounded-full transition-all hover:bg-hover;
     }
+
+    .lg-button {
+        @apply w-14 h-14 bg-background text-secondary text-lg rounded-full flex items-center justify-center transition-all hover:bg-primary hover:text-white;
+    }
 }
 
 :root {
@@ -26,6 +30,11 @@
     /* Text color */
     --color-text-primary: #8774e1;
     --color-text-secondary: #aaaaaa;
+    --color-message-meta-own: #ffffff88;
+}
+
+* {
+    scroll-behavior: smooth;
 }
 
 /* Custom scrollbar styles for webkit browsers */

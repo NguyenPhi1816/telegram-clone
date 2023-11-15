@@ -4,7 +4,7 @@ import ChatAppendix from '../Icon/ChatAppendix';
 
 const ChatInput = () => {
     return (
-        <div className="mb-5 px-4 flex w-full">
+        <div className="mb-5 px-4 pt-2 flex w-full border-t border-secondary">
             <div className="flex-1 flex items-end">
                 <input
                     className="p-5 w-full h-14 bg-background rounded-xl rounded-br-none"
@@ -15,7 +15,7 @@ const ChatInput = () => {
                 </div>
             </div>
             <div>
-                <button className="w-14 h-14 bg-background rounded-full flex items-center justify-center">
+                <button className="lg-button">
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>

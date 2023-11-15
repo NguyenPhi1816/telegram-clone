@@ -17,6 +17,7 @@ const config: Config = {
             colors: {
                 primary: 'var(--color-text-primary)',
                 secondary: 'var(--color-text-secondary)',
+                messageMetaOwn: 'var(--color-message-meta-own)',
             },
             outlineColor: {
                 primary: 'var(--color-text-primary)',
@@ -29,6 +30,9 @@ const config: Config = {
             },
             width: {
                 'chat-item-info-width': 'calc(100% - 54px - 8px)',
+            },
+            height: {
+                'conversation-max-height': 'calc(100vh - 56px - 84px)',
             },
             borderColor: {
                 secondary: 'var(--background-color-hover)',

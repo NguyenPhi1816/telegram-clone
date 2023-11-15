@@ -10,9 +10,7 @@ const ChatPage = async ({ params }: { params: { conversationId: string } }) => {
                     <ChatHeader />
                 </div>
                 <div className="flex-1">
-                    <div className="mx-auto w-[45.5rem] h-full">
-                        <ConversationPanel />
-                    </div>
+                    <ConversationPanel />
                 </div>
                 <div>
                     <div className="mx-auto w-[45.5rem]">
