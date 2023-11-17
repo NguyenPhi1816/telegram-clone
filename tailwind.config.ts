@@ -34,6 +34,7 @@ const config: Config = {
             },
             height: {
                 'conversation-max-height': 'calc(100vh - 56px - 84px)',
+                'setting-overlay-body-height': 'calc(100vh -56px)',
             },
             borderColor: {
                 primary: 'var(--background-color-primary)',

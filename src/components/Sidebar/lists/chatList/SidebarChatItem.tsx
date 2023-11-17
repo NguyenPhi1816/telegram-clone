@@ -16,7 +16,7 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
     isUnread,
 }) => {
     return (
-        <Link href={`${data.id}`} className="block">
+        <Link href={`/${data.id}`} className="block">
             <div
                 className={`${
                     isSelected && 'sidebar-chat-item-active'
