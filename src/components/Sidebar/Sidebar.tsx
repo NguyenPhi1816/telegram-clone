@@ -3,7 +3,7 @@ import { useState } from 'react';
 import SidebarChatList from './lists/chatList/SidebarChatList';
 import SidebarHeader from './SidebarHeader';
 import SidebarContactList from './lists/contactList/SidebarContactList';
-import SidebarSettingOverlay from './overlays/SidebarSettingOverlay';
+import SidebarSettingOverlay from './overlays/settings/SidebarSettingOverlay';
 
 const Sidebar = () => {
     const [showContacts, setShowContacts] = useState<boolean>(false);

@@ -22,6 +22,7 @@ const config: Config = {
             },
             outlineColor: {
                 primary: 'var(--color-text-primary)',
+                secondary: 'var(--border-color-default)',
             },
             caretColor: {
                 primary: 'var(--color-text-primary)',
@@ -43,6 +44,9 @@ const config: Config = {
             boxShadow: {
                 default:
                     '0 0.25rem 0.5rem 0.125rem var(--color-default-shadow)',
+            },
+            accentColor: {
+                primary: 'var(--background-color-primary)',
             },
         },
     },
