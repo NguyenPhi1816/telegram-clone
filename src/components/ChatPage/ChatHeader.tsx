@@ -14,9 +14,13 @@ import TooltipItem from '../Tooltip/TooltipItem';
 
 interface ChatHeaderProps {
     onShowEditChatProfile: () => void;
+    onShowSelectMessage: () => void;
 }
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({ onShowEditChatProfile }) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({
+    onShowEditChatProfile,
+    onShowSelectMessage,
+}) => {
     const [isShowTooltipMenu, setIsShowTooltipMenu] = useState<boolean>(false);
 
     const handleToggleTooltipMenu = (): void => {
@@ -26,6 +30,11 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ onShowEditChatProfile }) => {
     const handleShowEditChatProfile = (): void => {
         setIsShowTooltipMenu(false);
         onShowEditChatProfile();
+    };
+
+    const handleShowSelectMessage = (): void => {
+        setIsShowTooltipMenu(false);
+        onShowSelectMessage();
     };
 
     return (
@@ -63,6 +72,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ onShowEditChatProfile }) => {
                                         <FontAwesomeIcon icon={faCircleCheck} />
                                     }
                                     content="Select messages"
+                                    onClick={handleShowSelectMessage}
                                 />
                                 <TooltipItem
                                     icon={<FontAwesomeIcon icon={faBan} />}
