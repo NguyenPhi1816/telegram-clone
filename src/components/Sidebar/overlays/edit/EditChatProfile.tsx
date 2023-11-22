@@ -70,8 +70,8 @@ const EditChatProfile: React.FC<RightSidebarProps> = ({ onClose }) => {
                     />
                     <div className="mt-2 mb-4 px-4 text-secondary text-base">
                         <p>
-                            You can replace Username's photo with another photo
-                            that only you will see
+                            You can replace Username&apos;s photo with another
+                            photo that only you will see
                         </p>
                     </div>
                 </div>
