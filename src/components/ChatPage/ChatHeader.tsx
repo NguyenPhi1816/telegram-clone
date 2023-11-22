@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tooltip from '../Tooltip/Tooltip';
 import React, { useState } from 'react';
 import TooltipItem from '../Tooltip/TooltipItem';
+import Image from 'next/image';
 
 interface ChatHeaderProps {
     onShowEditChatProfile: () => void;
@@ -42,9 +43,12 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             <div className="flex py-1 pl-[23px] pr-[13px] bg-background">
                 <div className="flex-1 flex items-center justify-start">
                     <button className="w-10 h-10 mr-[10px]">
-                        <img
+                        <Image
                             className="w-full h-full object-cover rounded-full"
-                            src="./test-image.jpg"
+                            src="/test-image.jpg"
+                            alt="User image"
+                            width={100}
+                            height={100}
                         />
                     </button>
                     <span>

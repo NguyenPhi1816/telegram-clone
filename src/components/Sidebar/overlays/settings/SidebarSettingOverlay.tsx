@@ -19,6 +19,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import SidebarSettingItem from '../SidebarSettingItem';
+import Image from 'next/image';
 
 interface SidebarSettingOverlayProps {
     onClose: () => void;
@@ -55,7 +56,13 @@ const SidebarSettingOverlay: React.FC<SidebarSettingOverlayProps> = ({
                 <div className="flex-1 overflow-hidden">
                     <div className="h-full w-full overflow-y-scroll">
                         <div className="relative">
-                            <img src="./test-image.jpg" alt="Thumbnail" />
+                            <Image
+                                className="w-full h-full"
+                                src="/test-image.jpg"
+                                alt="User image"
+                                width={100}
+                                height={100}
+                            />
                             <div className="absolute bottom-2 left-6">
                                 <h3 className="font-semibold text-lg text-white">
                                     Phi Nguyen

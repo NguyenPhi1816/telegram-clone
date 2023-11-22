@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import SidebarSettingItem from '../SidebarSettingItem';
 import Checkbox from '@/components/inputs/Checkbox';
+import Image from 'next/image';
 
 interface RightSidebarProps {
     onClose: () => void;
@@ -31,10 +32,12 @@ const EditChatProfile: React.FC<RightSidebarProps> = ({ onClose }) => {
             <div className="w-full">
                 <div className="w-full py-4 px-6 flex flex-col items-center">
                     <div className="w-[120px] h-[120px]">
-                        <img
+                        <Image
                             className="w-full h-full rounded-full"
-                            src="./test-image.jpg"
-                            alt="avatar"
+                            src="/test-image.jpg"
+                            alt="User image"
+                            width={100}
+                            height={100}
                         />
                     </div>
                     <div className="mb-8">

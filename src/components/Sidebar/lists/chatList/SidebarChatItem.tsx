@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface ChatItemDataType {
@@ -22,10 +23,12 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
                     isSelected && 'sidebar-chat-item-active'
                 }  p-[9px] flex w-full items-center place-content-between rounded-lg hover:bg-hover`}
             >
-                <img
+                <Image
                     className="mr-2 w-[54px] h-[54px] rounded-full"
                     src="/test-image.jpg"
-                    alt="User Image"
+                    alt="User image"
+                    width={100}
+                    height={100}
                 />
                 <span className="w-chat-item-info-width flex flex-col place-content-evenly">
                     <span className="flex items-center place-content-between">
