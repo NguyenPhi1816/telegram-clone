@@ -51,7 +51,7 @@ const ConversationPanel: React.FC<ConversationPanelProps> = ({
     return (
         <div
             ref={conversationPanelRef}
-            className="flex flex-col-reverse h-conversation-max-height overflow-y-scroll"
+            className="flex flex-col-reverse h-full overflow-y-scroll"
         >
             <ul className="w-full flex flex-col justify-end items-end">
                 {Array.from({ length: 20 }, (_, index) => ({ id: index })).map(

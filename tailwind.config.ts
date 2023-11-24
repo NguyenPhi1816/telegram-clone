@@ -34,7 +34,8 @@ const config: Config = {
                 'chat-item-info-width': 'calc(100% - 54px - 8px)',
             },
             height: {
-                'conversation-max-height': 'calc(100vh - 56px - 84px)',
+                'conversation-height-w-input-bar': 'calc(100vh - 56px - 84px)',
+                'conversation-height-no-input-bar': 'calc(100vh - 56px)',
                 'setting-overlay-body-height': 'calc(100vh -56px)',
             },
             borderColor: {

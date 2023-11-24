@@ -16,13 +16,20 @@ import Image from 'next/image';
 interface ChatHeaderProps {
     onShowEditChatProfile: () => void;
     onShowSelectMessage: () => void;
+    onBlockUser: () => void;
+    onUnblockUser: () => void;
+    onDeleteChat: () => void;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
     onShowEditChatProfile,
     onShowSelectMessage,
+    onBlockUser,
+    onUnblockUser,
+    onDeleteChat,
 }) => {
     const [isShowTooltipMenu, setIsShowTooltipMenu] = useState<boolean>(false);
+    const [isBlockUser, setIsBlockUser] = useState<boolean>(false);
 
     const handleToggleTooltipMenu = (): void => {
         setIsShowTooltipMenu((prev) => !prev);
@@ -36,6 +43,23 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
     const handleShowSelectMessage = (): void => {
         setIsShowTooltipMenu(false);
         onShowSelectMessage();
+    };
+
+    const handleBlockUser = (): void => {
+        setIsShowTooltipMenu(false);
+        setIsBlockUser(true);
+        onBlockUser();
+    };
+
+    const handleUnblockUser = (): void => {
+        setIsShowTooltipMenu(false);
+        setIsBlockUser(false);
+        onUnblockUser();
+    };
+
+    const handleDeleteChat = (): void => {
+        setIsShowTooltipMenu(false);
+        onDeleteChat();
     };
 
     return (
@@ -59,6 +83,14 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                     </span>
                 </div>
                 <div className="flex justify-center items-center">
+                    {isBlockUser && (
+                        <button
+                            onClick={handleUnblockUser}
+                            className="mr-2 py-[7px] px-[22px] text-sm font-semibold rounded-lg bg-primary"
+                        >
+                            UNBLOCK USER
+                        </button>
+                    )}
                     <button className="button">
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
@@ -78,10 +110,20 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                                     content="Select messages"
                                     onClick={handleShowSelectMessage}
                                 />
-                                <TooltipItem
-                                    icon={<FontAwesomeIcon icon={faBan} />}
-                                    content="Block user"
-                                />
+                                {!isBlockUser && (
+                                    <TooltipItem
+                                        icon={<FontAwesomeIcon icon={faBan} />}
+                                        content="Block user"
+                                        onClick={handleBlockUser}
+                                    />
+                                )}
+                                {isBlockUser && (
+                                    <TooltipItem
+                                        icon={<FontAwesomeIcon icon={faBan} />}
+                                        content="Unblock user"
+                                        onClick={handleUnblockUser}
+                                    />
+                                )}
                                 <div className="my-1 w-full border-t-[1px] border-t-secondary"></div>
                                 <TooltipItem
                                     icon={
@@ -95,6 +137,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                                             Delete chat
                                         </p>
                                     }
+                                    onClick={handleDeleteChat}
                                 />
                             </>
                         }

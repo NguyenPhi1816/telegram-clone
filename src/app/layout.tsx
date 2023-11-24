@@ -35,6 +35,10 @@ export default function RootLayout({
             >
                 <Sidebar />
                 {children}
+                <div
+                    id="root"
+                    // className="fixed top-0 left-0 w-[100vw] h-[100vh]"
+                ></div>
             </body>
         </html>
     );
