@@ -9,8 +9,12 @@ const Sidebar = () => {
     const [showContacts, setShowContacts] = useState<boolean>(false);
     const [showSettings, setShowSettings] = useState<boolean>(false);
 
-    const handleToggleContacts = (): void => {
-        setShowContacts((prev) => !prev);
+    const handleShowContacts = (): void => {
+        setShowContacts(true);
+    };
+
+    const handleHideContacts = (): void => {
+        setShowContacts(false);
     };
 
     const handleToggleSettings = (): void => {
@@ -22,7 +26,8 @@ const Sidebar = () => {
             <div className="flex flex-col h-full bg-background">
                 <div className="flex pt-[6px] pb-2 px-[13px] text-secondary">
                     <SidebarHeader
-                        onToggleContacts={handleToggleContacts}
+                        onShowContacts={handleShowContacts}
+                        onHideContacts={handleHideContacts}
                         onShowSettings={handleToggleSettings}
                     />
                 </div>

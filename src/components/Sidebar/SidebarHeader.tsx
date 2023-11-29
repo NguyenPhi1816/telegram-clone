@@ -14,12 +14,14 @@ import TooltipItem from '../Tooltip/TooltipItem';
 import Search from './Search';
 
 interface SidebarHeaderProps {
-    onToggleContacts: () => void;
+    onShowContacts: () => void;
+    onHideContacts: () => void;
     onShowSettings: () => void;
 }
 
 const SidebarHeader: React.FC<SidebarHeaderProps> = ({
-    onToggleContacts,
+    onShowContacts,
+    onHideContacts,
     onShowSettings,
 }) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
@@ -32,7 +34,7 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
 
     const handleSearchBlurred = (): void => {
         setIsSearchFocused(false);
-        onToggleContacts();
+        onHideContacts();
     };
 
     const handleToggleTooltipMenu = (): void => {
@@ -42,7 +44,7 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
     const handleShowContacts = (): void => {
         setIsSearchFocused(true);
         setIsShowTooltipMenu(false);
-        onToggleContacts();
+        onShowContacts();
     };
 
     const handleShowSettings = (): void => {

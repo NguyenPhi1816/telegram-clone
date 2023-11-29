@@ -24,4 +24,6 @@ const Search = React.forwardRef<Ref, SearchProps>(
     ),
 );
 
+Search.displayName = 'Search';
+
 export default Search;
