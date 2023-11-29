@@ -40,10 +40,11 @@ const Checkbox: React.FC<CheckboxProps> = ({
                 className={`peer w-0 h-0 after:content-[""] after:absolute after:top-0 after:left-0 after:block after:bg-background after:border-2 after:border-secondary checked:after:bg-primary checked:after:border-primary checked:after:content-['\xb9'] ${customInputClass}`}
                 type="checkbox"
                 onClick={onClick}
-                checked={checked}
+                defaultChecked={checked}
+                // checked={checked}
             />
             <span
-                className={`absolute top-0 left-0 invisible flex justify-center items-center peer-checked:visible ${customCheckClass}`}
+                className={`absolute top-0 left-0 invisible text-white flex justify-center items-center peer-checked:visible ${customCheckClass}`}
             >
                 <FontAwesomeIcon icon={faCheck} />
             </span>

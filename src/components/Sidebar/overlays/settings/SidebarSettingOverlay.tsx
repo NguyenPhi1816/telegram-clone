@@ -60,8 +60,8 @@ const SidebarSettingOverlay: React.FC<SidebarSettingOverlayProps> = ({
                                 className="w-full h-full"
                                 src="/test-image.jpg"
                                 alt="User image"
-                                width={100}
-                                height={100}
+                                width={500}
+                                height={500}
                             />
                             <div className="absolute bottom-2 left-6">
                                 <h3 className="font-semibold text-lg text-white">

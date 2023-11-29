@@ -9,13 +9,14 @@ import React from 'react';
 import SidebarSettingItem from '../SidebarSettingItem';
 import Checkbox from '@/components/inputs/Checkbox';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 
 interface RightSidebarProps {
     onClose: () => void;
 }
 
 const EditChatProfile: React.FC<RightSidebarProps> = ({ onClose }) => {
-    return (
+    return createPortal(
         <div className="h-[100vh] w-[25vw] flex flex-col bg-background border-[1px] border-secondary">
             <div className=" px-[13px] py-[8px] flex items-center w-full">
                 <button className="button" onClick={onClose}>
@@ -29,15 +30,15 @@ const EditChatProfile: React.FC<RightSidebarProps> = ({ onClose }) => {
                     </div>
                 </div>
             </div>
-            <div className="w-full">
+            <div className="w-full text-white">
                 <div className="w-full py-4 px-6 flex flex-col items-center">
                     <div className="w-[120px] h-[120px]">
                         <Image
                             className="w-full h-full rounded-full"
                             src="/test-image.jpg"
                             alt="User image"
-                            width={100}
-                            height={100}
+                            width={500}
+                            height={500}
                         />
                     </div>
                     <div className="mb-8">
@@ -86,7 +87,8 @@ const EditChatProfile: React.FC<RightSidebarProps> = ({ onClose }) => {
                     />
                 </div>
             </div>
-        </div>
+        </div>,
+        document.getElementById('right-sidebar')!,
     );
 };
 

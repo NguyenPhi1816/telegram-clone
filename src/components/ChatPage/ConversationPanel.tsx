@@ -97,7 +97,6 @@ const ConversationPanel: React.FC<ConversationPanelProps> = ({
                 )}
             </ul>
             <ScrollToBottom isShow={isShowBtn} onClick={handleScrollToBottom} />
-            s
         </div>
     );
 };

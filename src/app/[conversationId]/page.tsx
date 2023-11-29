@@ -3,7 +3,6 @@ import ChatHeader from '@/components/ChatPage/ChatHeader';
 import ChatInput from '@/components/ChatPage/ChatInput';
 import ChatSelectToolbar from '@/components/ChatPage/ChatSelectToolbar';
 import ConversationPanel from '@/components/ChatPage/ConversationPanel';
-import RightSidebar from '@/components/Sidebar/RightSidebar';
 import EditChatProfile from '@/components/Sidebar/overlays/edit/EditChatProfile';
 import ConfirmationDialog from '@/components/dialogs/ConfirmationDialog';
 import Image from 'next/image';
@@ -109,11 +108,9 @@ const ChatPage = ({ params }: { params: { conversationId: string } }) => {
                     </div>
                 </div>
             </div>
-            <RightSidebar>
-                {showEditChatProfile && (
-                    <EditChatProfile onClose={handleToggleEditChatProfile} />
-                )}
-            </RightSidebar>
+            {showEditChatProfile && (
+                <EditChatProfile onClose={handleToggleEditChatProfile} />
+            )}
             {isShowDltChatComfirm && (
                 <ConfirmationDialog
                     title={

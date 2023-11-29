@@ -11,6 +11,7 @@ import {
     faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import TooltipItem from '../Tooltip/TooltipItem';
+import Search from './Search';
 
 interface SidebarHeaderProps {
     onToggleContacts: () => void;
@@ -118,16 +119,8 @@ const SidebarHeader: React.FC<SidebarHeaderProps> = ({
                     )}
                 </div>
             </Tooltip>
-            <div className="relative ml-[13px]">
-                <input
-                    ref={inputRef}
-                    className="input px-[43px] pt-[6px] pb-[7px] peer"
-                    placeholder="Search"
-                    onFocus={handleSearchFocused}
-                />
-                <span className="absolute top-1/2 left-0 -translate-y-1/2 translate-x-4 peer-focus:text-primary">
-                    <FontAwesomeIcon icon={faSearch} />
-                </span>
+            <div>
+                <Search onSearchFocused={handleSearchFocused} />
             </div>
         </>
     );

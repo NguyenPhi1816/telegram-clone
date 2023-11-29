@@ -6,7 +6,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
 import Sidebar from '@/components/Sidebar/Sidebar';
-import RightSidebar from '@/components/Sidebar/RightSidebar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -35,10 +34,7 @@ export default function RootLayout({
             >
                 <Sidebar />
                 {children}
-                <div
-                    id="root"
-                    // className="fixed top-0 left-0 w-[100vw] h-[100vh]"
-                ></div>
+                <div id="root"></div>
             </body>
         </html>
     );
