@@ -30,11 +30,9 @@ export default function RootLayout({
                 ></link>
             </head>
             <body
-                className={`${inter.className} flex w-full h-full overflow-hidden`}
+                className={`${inter.className} flex w-[100vw] h-[100vh] overflow-hidden`}
             >
-                <Sidebar />
                 {children}
-                <div id="root"></div>
             </body>
         </html>
     );

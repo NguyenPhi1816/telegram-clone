@@ -10,7 +10,7 @@
     }
 
     .background {
-        @apply relative bg-theme w-[75vw] h-[100vh] text-white before:absolute before:top-0 before:left-0 before:block before:w-full before:h-full before:bg-repeat before:bg-contain before:bg-background-pattern;
+        @apply relative bg-theme w-full h-full text-white before:absolute before:top-0 before:left-0 before:block before:w-full before:h-full before:bg-repeat before:bg-contain before:bg-background-pattern;
     }
 
     .button {

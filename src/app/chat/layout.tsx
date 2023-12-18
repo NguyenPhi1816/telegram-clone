@@ -1,3 +1,5 @@
+import Sidebar from '@/components/Sidebar/Sidebar';
+
 export default function ProductDetailLayout({
     children,
 }: {
@@ -5,6 +7,7 @@ export default function ProductDetailLayout({
 }) {
     return (
         <>
+            <Sidebar />
             {children}
             <div
                 id="right-sidebar"

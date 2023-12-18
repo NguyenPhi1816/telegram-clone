@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MessageContainer, { MessageContainerType } from './MessageContainer';
 import ScrollToBottom from './ScrollToBottom';
-import Checkbox, { CheckboxSize } from '../inputs/Checkbox';
+import Checkbox, { CheckboxSize } from '../form/Checkbox';
 
 interface ConversationPanelProps {
     showSelectMessage: boolean;

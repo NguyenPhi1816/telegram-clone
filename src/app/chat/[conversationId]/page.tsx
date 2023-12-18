@@ -6,7 +6,8 @@ import ConversationPanel from '@/components/ChatPage/ConversationPanel';
 import EditChatProfile from '@/components/Sidebar/overlays/edit/EditChatProfile';
 import ConfirmationDialog from '@/components/dialogs/ConfirmationDialog';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useUserStore } from '../../../../zustand';
 
 const ChatPage = ({ params }: { params: { conversationId: string } }) => {
     const [showEditChatProfile, setShowEditChatProfile] =
@@ -65,8 +66,12 @@ const ChatPage = ({ params }: { params: { conversationId: string } }) => {
         setIsShowDltChatConfirm(false);
     };
 
+    useEffect(() => {
+        console.log(useUserStore.getState().user);
+    }, []);
+
     return (
-        <div className="background flex">
+        <div className="background flex max-w-[75vw]">
             <div className="flex-1 h-full relative flex flex-col">
                 <div className="w-full">
                     <ChatHeader

@@ -17,7 +17,7 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
     isUnread,
 }) => {
     return (
-        <Link href={`/${data.id}`} className="block">
+        <Link href={`/chat/${data.id}`} className="block">
             <div
                 className={`${
                     isSelected && 'sidebar-chat-item-active'
@@ -32,14 +32,16 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
                 />
                 <span className="w-chat-item-info-width flex flex-col place-content-evenly">
                     <span className="flex items-center place-content-between">
-                        <h3 className="text-white font-semibold">Username</h3>
-                        <p
+                        <h3 className="text-white font-semibold">
+                            Room Chat 0
+                        </h3>
+                        {/* <p
                             className={`${
                                 isSelected && 'sidebar-chat-item-active-text'
                             } text-secondary text-xs`}
                         >
                             10:23
-                        </p>
+                        </p> */}
                     </span>
                     <span className="flex">
                         <p
@@ -47,19 +49,15 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
                                 isSelected && 'sidebar-chat-item-active-text'
                             } flex-1 text-secondary text-sm truncate`}
                         >
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Enim voluptates ratione, temporibus quis odit
-                            velit ipsam reiciendis mollitia maiores dolor beatae
-                            tenetur commodi in eos sapiente similique quam
-                            quisquam earum.
+                            This room is about playing game.
                         </p>
-                        {isUnread && (
+                        {/* {isUnread && (
                             <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
                                 <p className="text-white text-center text-sm">
                                     1
                                 </p>
                             </div>
-                        )}
+                        )} */}
                     </span>
                 </span>
             </div>

@@ -49,6 +49,9 @@ const config: Config = {
             accentColor: {
                 primary: 'var(--background-color-primary)',
             },
+            ringOffsetColor: {
+                background: 'var(--background-color)',
+            },
         },
     },
     plugins: [],

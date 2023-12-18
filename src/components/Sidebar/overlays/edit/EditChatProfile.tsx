@@ -1,4 +1,4 @@
-import Input from '@/components/inputs/Input';
+import Input from '@/components/form/Input';
 import {
     faArrowLeft,
     faImage,
@@ -7,7 +7,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import SidebarSettingItem from '../SidebarSettingItem';
-import Checkbox from '@/components/inputs/Checkbox';
+import Checkbox from '@/components/form/Checkbox';
 import Image from 'next/image';
 import { createPortal } from 'react-dom';
 

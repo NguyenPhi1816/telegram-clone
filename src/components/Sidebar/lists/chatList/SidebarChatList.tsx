@@ -8,20 +8,16 @@ const SidebarChatList = () => {
     return (
         <div className="w-full h-full p-2 overflow-y-scroll">
             <ul>
-                {Array.from({ length: 20 }, (_, index) => ({ id: index })).map(
-                    (item) => (
-                        <li key={item.id}>
-                            <SidebarChatItem
-                                data={item}
-                                isSelected={
-                                    pathName.replace('/', '') ===
-                                    item.id.toString()
-                                }
-                                isUnread={item.id % 2 === 0}
-                            />
-                        </li>
-                    ),
-                )}
+                <li>
+                    <SidebarChatItem
+                        data={{ id: 0 }}
+                        isSelected={
+                            pathName.replace('/', '') ===
+                            { id: 0 }.id.toString()
+                        }
+                        isUnread={{ id: 0 }.id % 2 === 0}
+                    />
+                </li>
             </ul>
         </div>
     );
