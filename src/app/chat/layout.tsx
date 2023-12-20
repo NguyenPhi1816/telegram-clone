@@ -6,13 +6,13 @@ export default function ProductDetailLayout({
     children: React.ReactNode;
 }) {
     return (
-        <>
+        <div className="relative w-[100vw] h-[100vh] flex">
             <Sidebar />
             {children}
             <div
                 id="right-sidebar"
-                className="border-r-[1px] border-r-secondary relative"
+                className="absolute right-0 top-0 border-r-[1px] border-r-secondary"
             ></div>
-        </>
+        </div>
     );
 }

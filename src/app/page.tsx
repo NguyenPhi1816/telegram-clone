@@ -1,24 +1,31 @@
-'use client';
-import { redirect } from 'next/navigation';
-import { useClientStore, useUserStore } from '../../zustand';
-import { useEffect } from 'react';
+import Avatar from '@/components/Avatar';
+import Link from 'next/link';
 
 export default function Home() {
-    const getClient = async () => {
-        const { ChatClient } = await import(
-            '../proto-gen/proto/ChatServiceClientPb'
-        );
-        const client = new ChatClient('http://localhost:8080');
-        useClientStore.setState({ client: client });
-    };
-
-    useEffect(() => {
-        getClient();
-        const user = useUserStore.getState().user;
-        if (!user) {
-            redirect('/login');
-        } else {
-            redirect('/chat');
-        }
-    }, []);
+    return (
+        <div className="background flex justify-center items-center">
+            <div className="flex flex-col justify-center items-center z-10">
+                <Avatar
+                    url="https://robohash.org/123.png"
+                    className="mb-10 bg-primary"
+                />
+                <h1 className="mb-7 font-bold text-3xl">Welcome to Telegram</h1>
+                <div className="w-full flex justify-around">
+                    <Link
+                        href={'/login'}
+                        className="input w-1/2 bg-primary flex justify-center items-center"
+                    >
+                        <span className="font-bold">Sign In</span>
+                    </Link>
+                    <span className="w-4"></span>
+                    <Link
+                        href={'/login'}
+                        className="input w-1/2 bg-primary flex justify-center items-center"
+                    >
+                        <span className="font-bold">Login</span>
+                    </Link>
+                </div>
+            </div>
+        </div>
+    );
 }

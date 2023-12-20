@@ -2,21 +2,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 import MessageContainer, { MessageContainerType } from './MessageContainer';
 import ScrollToBottom from './ScrollToBottom';
-import Checkbox, { CheckboxSize } from '../form/Checkbox';
+import { StreamMessage, User } from '@/proto-gen/proto/chat_pb';
+import { useUserStore } from '../../../zustand';
 
 interface ConversationPanelProps {
-    showSelectMessage: boolean;
-    selectedMessage: number[];
-    onSelectMessage: (id: number) => void;
+    msgs: Array<StreamMessage.AsObject>;
 }
 
-const ConversationPanel: React.FC<ConversationPanelProps> = ({
-    showSelectMessage = false,
-    selectedMessage,
-    onSelectMessage,
-}) => {
+const ConversationPanel: React.FC<ConversationPanelProps> = ({ msgs }) => {
     const conversationPanelRef = useRef<HTMLDivElement | null>(null);
     const [isShowBtn, setIsShowBtn] = useState<boolean>(false);
+    const [user, setUser] = useState<User.AsObject | null>(null);
 
     const handleScrollToBottom = () => {
         if (conversationPanelRef.current) {
@@ -48,53 +44,33 @@ const ConversationPanel: React.FC<ConversationPanelProps> = ({
         };
     }, []);
 
+    useEffect(() => {
+        const _user = useUserStore.getState().user;
+        setUser(_user);
+    }, [useUserStore.getState().user]);
+
     return (
         <div
             ref={conversationPanelRef}
             className="flex flex-col-reverse h-full overflow-y-scroll"
         >
             <ul className="w-full flex flex-col justify-end items-end">
-                {Array.from({ length: 20 }, (_, index) => ({ id: index })).map(
-                    (item) => (
-                        <li
-                            key={item.id}
-                            className="w-full py-1 mb-[6px]"
-                            style={{
-                                backgroundColor:
-                                    selectedMessage.indexOf(item.id) !== -1
-                                        ? '#000000'
-                                        : 'transparent',
-                            }}
-                        >
+                {msgs &&
+                    user &&
+                    msgs.map((msg, index) => (
+                        <li key={index} className="w-full py-1 mb-[6px]">
                             <div className="mx-auto px-4 w-[45.5rem] flex items-end">
-                                {showSelectMessage && (
-                                    <Checkbox
-                                        className="mr-8 "
-                                        size={CheckboxSize.lg}
-                                        rounded
-                                        onClick={() => onSelectMessage(item.id)}
-                                        checked={
-                                            selectedMessage.indexOf(item.id) !==
-                                            -1
-                                        }
-                                    />
-                                )}
                                 <MessageContainer
-                                    message="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Sapiente autem similique, provident expedita quis exercitationem
-                    labore, laboriosam quia atque quos ducimus iste dignissimos ex
-                    culpa dicta distinctio veritatis aliquam! Ex."
+                                    message={msg}
                                     type={
-                                        item.id % 2 === 0
+                                        msg.id === user.id
                                             ? MessageContainerType.CURRENT_USER
                                             : MessageContainerType.OTHER_USER
                                     }
-                                    isSeen={true}
                                 />
                             </div>
                         </li>
-                    ),
-                )}
+                    ))}
             </ul>
             <ScrollToBottom isShow={isShowBtn} onClick={handleScrollToBottom} />
         </div>

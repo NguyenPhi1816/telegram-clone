@@ -5,16 +5,28 @@ import { useClientStore, useUserStore } from '../../../zustand';
 import Avatar from '../../components/Avatar';
 import Input from '../../components/form/Input';
 import Submit from '../../components/form/Submit';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Login = () => {
     const router = useRouter();
     const [username, setUsername] = useState<string>('Enter your name');
     const [avatar, setAvatar] = useState<string>('https://robohash.org/1.png');
 
+    const getClient = async () => {
+        const { ChatClient } = await import(
+            '../../proto-gen/proto/ChatServiceClientPb'
+        );
+        const client = new ChatClient('http://localhost:8080');
+        useClientStore.setState({ client: client });
+    };
+
+    useEffect(() => {
+        getClient();
+    }, []);
+
     const handleUserSubmit = () => {
-        const client = useClientStore.getState().client!;
-        if (!username || !avatar) return;
+        const client = useClientStore.getState().client;
+        if (!client || !username || !avatar) return;
         const req = new InitiateRequest();
         req.setName(username);
         req.setAvatarUrl(avatar);
@@ -37,6 +49,7 @@ const Login = () => {
             <div className="w-full h-full flex justify-center items-center relative z-[1]">
                 <div className="w-[35%] bg-background p-6 rounded-xl flex flex-col items-center">
                     <Avatar
+                        className="mb-10 mt-5"
                         onChange={(url) => {
                             setAvatar(url);
                         }}

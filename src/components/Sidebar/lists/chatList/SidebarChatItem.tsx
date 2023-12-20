@@ -25,7 +25,7 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
             >
                 <Image
                     className="mr-2 w-[54px] h-[54px] rounded-full"
-                    src="/test-image.jpg"
+                    src="/test-image.png"
                     alt="User image"
                     width={100}
                     height={100}
@@ -35,13 +35,6 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
                         <h3 className="text-white font-semibold">
                             Room Chat 0
                         </h3>
-                        {/* <p
-                            className={`${
-                                isSelected && 'sidebar-chat-item-active-text'
-                            } text-secondary text-xs`}
-                        >
-                            10:23
-                        </p> */}
                     </span>
                     <span className="flex">
                         <p
@@ -51,13 +44,6 @@ const SidebarChatItem: React.FC<SidebarChatItemProps> = ({
                         >
                             This room is about playing game.
                         </p>
-                        {/* {isUnread && (
-                            <div className="w-6 h-6 rounded-full bg-primary flex items-center justify-center">
-                                <p className="text-white text-center text-sm">
-                                    1
-                                </p>
-                            </div>
-                        )} */}
                     </span>
                 </span>
             </div>

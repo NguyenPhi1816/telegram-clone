@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChatAppendix from '../Icon/ChatAppendix';
 import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
+import { StreamMessage } from '@/proto-gen/proto/chat_pb';
+import Avatar from '../Avatar';
 
 export enum MessageContainerType {
     CURRENT_USER,
@@ -8,15 +10,13 @@ export enum MessageContainerType {
 }
 
 interface MessageContainerProps {
-    message: string;
+    message: StreamMessage.AsObject;
     type: MessageContainerType;
-    isSeen: boolean;
 }
 
 const MessageContainer: React.FC<MessageContainerProps> = ({
     message,
     type,
-    isSeen,
 }) => {
     return (
         <div
@@ -40,16 +40,11 @@ const MessageContainer: React.FC<MessageContainerProps> = ({
                             : 'bg-background rounded-bl-none'
                     }`}
                 >
-                    <p>{message}</p>
-                    {type === MessageContainerType.CURRENT_USER && (
-                        <div className="flex justify-end text-xs">
-                            <div className="text-messageMetaOwn mr-1">7:55</div>
-                            <div>
-                                {!isSeen && <FontAwesomeIcon icon={faCheck} />}
-                                {isSeen && (
-                                    <FontAwesomeIcon icon={faCheckDouble} />
-                                )}
-                            </div>
+                    <p>{message.message}</p>
+                    {type === MessageContainerType.OTHER_USER && (
+                        <div className="mt-1 flex justify-end text-xs">
+                            {/* <div className="text-messageMetaOwn mr-1">7:55</div> */}
+                            <div>{message.senderName}</div>
                         </div>
                     )}
                 </div>
@@ -62,6 +57,10 @@ const MessageContainer: React.FC<MessageContainerProps> = ({
                                 : '',
                     }}
                 >
+                    <Avatar
+                        className="absolute bottom-[8px] left-4 w-[40px] h-[40px]"
+                        url={message.senderAvatar}
+                    />
                     <ChatAppendix
                         color={
                             type === MessageContainerType.CURRENT_USER
