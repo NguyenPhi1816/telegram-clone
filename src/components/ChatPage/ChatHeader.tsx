@@ -5,12 +5,14 @@ import Tooltip from '../Tooltip/Tooltip';
 import React, { useState } from 'react';
 import TooltipItem from '../Tooltip/TooltipItem';
 import Image from 'next/image';
+import { Room } from '@/proto-gen/proto/chat_pb';
 
 interface ChatHeaderProps {
+    room: Room.AsObject;
     onShowMembers: () => void;
 }
 
-const ChatHeader: React.FC<ChatHeaderProps> = ({ onShowMembers }) => {
+const ChatHeader: React.FC<ChatHeaderProps> = ({ room, onShowMembers }) => {
     const [isShowTooltipMenu, setIsShowTooltipMenu] = useState<boolean>(false);
 
     const handleToggleTooltipMenu = (): void => {
@@ -29,16 +31,16 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({ onShowMembers }) => {
                     <button className="w-10 h-10 mr-[10px]">
                         <Image
                             className="w-full h-full object-cover rounded-full"
-                            src="/test-image.png"
-                            alt="User image"
+                            src={room.imageurl}
+                            alt="Room image"
                             width={100}
                             height={100}
                         />
                     </button>
                     <span>
-                        <h3 className="font-bold text-lg">Room Chat 0</h3>
+                        <h3 className="font-bold text-lg">{room.name}</h3>
                         <p className="text-sm text-secondary">
-                            This room is about playing game
+                            {room.description}
                         </p>
                     </span>
                 </div>

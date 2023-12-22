@@ -63,7 +63,7 @@ const ConversationPanel: React.FC<ConversationPanelProps> = ({ msgs }) => {
                                 <MessageContainer
                                     message={msg}
                                     type={
-                                        msg.id === user.id
+                                        msg.senderId === user.id
                                             ? MessageContainerType.CURRENT_USER
                                             : MessageContainerType.OTHER_USER
                                     }

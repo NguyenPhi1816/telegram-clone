@@ -27,10 +27,10 @@ const MessageContainer: React.FC<MessageContainerProps> = ({
             }`}
         >
             <div
-                className={`max-w-[30rem] flex items-end ${
+                className={`max-w-[30rem] relative flex items-end ${
                     type === MessageContainerType.CURRENT_USER
-                        ? 'flex-row'
-                        : 'flex-row-reverse'
+                        ? 'flex-row right-10'
+                        : 'flex-row-reverse left-10'
                 } `}
             >
                 <div

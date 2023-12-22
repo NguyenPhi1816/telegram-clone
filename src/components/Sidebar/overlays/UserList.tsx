@@ -2,7 +2,6 @@
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { createPortal } from 'react-dom';
 import SidebarContactList from '../lists/contactList/SidebarContactList';
 import {
@@ -11,6 +10,7 @@ import {
     useUserStreamStore,
 } from '../../../../zustand';
 import {
+    AllUserRequest,
     StreamRequest,
     User,
     UserStreamResponse,
@@ -21,7 +21,7 @@ interface RightSidebarProps {
     onClose: () => void;
 }
 
-const Members: React.FC<RightSidebarProps> = ({ onClose }) => {
+const UserList: React.FC<RightSidebarProps> = ({ onClose }) => {
     const pathname = usePathname();
     const [user, setUser] = useState<User.AsObject | null>(null);
     const [userList, setUserList] = useState<Array<User.AsObject>>([]);
@@ -31,26 +31,19 @@ const Members: React.FC<RightSidebarProps> = ({ onClose }) => {
     }, []);
 
     useEffect(() => {
-        useUserStreamStore.getState().endStream();
-
         const client = useClientStore.getState().client;
         if (!user || !client) return;
-        const idStr = pathname.replace('/chat/', '');
-        const conversationId = parseInt(idStr);
-
-        const req = new StreamRequest();
+        const req = new AllUserRequest();
         req.setUserId(user.id);
-        req.setRoomId(conversationId);
 
-        const userStream = client.userStream(req, {});
-        useUserStreamStore.setState({ stream: userStream });
-        userStream.on('data', (chunk) => {
+        const allUserStream = client.allUserStream(req, {});
+        allUserStream.on('data', (chunk) => {
             const users = (chunk as UserStreamResponse).toObject().usersList;
             setUserList(users);
         });
 
         return () => {
-            userStream.cancel();
+            allUserStream.cancel();
         };
     }, [user, useClientStore]);
 
@@ -69,20 +62,6 @@ const Members: React.FC<RightSidebarProps> = ({ onClose }) => {
                 </div>
             </div>
             <div className="w-full flex-1 overflow-hidden flex flex-col text-white">
-                <div className="w-full py-4 px-6 flex flex-col items-center">
-                    <div className="w-[120px] h-[120px]">
-                        <Image
-                            className="w-full h-full rounded-full"
-                            src="/test-image.png"
-                            alt="User image"
-                            width={500}
-                            height={500}
-                        />
-                    </div>
-                    <div className="mt-4">
-                        <h3 className="font-bold text-lg">Room Chat 0</h3>
-                    </div>
-                </div>
                 <div className="flex-1 overflow-hidden">
                     <SidebarContactList userList={userList} />
                 </div>
@@ -92,4 +71,4 @@ const Members: React.FC<RightSidebarProps> = ({ onClose }) => {
     );
 };
 
-export default Members;
+export default UserList;

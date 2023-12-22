@@ -1,7 +1,7 @@
 interface SubmitProps {
     value: string;
     className?: string;
-    onClick: () => void;
+    onClick: (e?: any) => void;
 }
 
 const Submit: React.FC<SubmitProps> = ({ value, className, onClick }) => {

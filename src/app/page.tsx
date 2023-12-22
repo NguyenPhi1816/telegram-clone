@@ -12,7 +12,7 @@ export default function Home() {
                 <h1 className="mb-7 font-bold text-3xl">Welcome to Telegram</h1>
                 <div className="w-full flex justify-around">
                     <Link
-                        href={'/login'}
+                        href={'/register'}
                         className="input w-1/2 bg-primary flex justify-center items-center"
                     >
                         <span className="font-bold">Sign In</span>

@@ -40,6 +40,49 @@ export class ChatClient {
     this.options_ = options;
   }
 
+  methodDescriptorRegister = new grpcWeb.MethodDescriptor(
+    '/chatPackage.Chat/Register',
+    grpcWeb.MethodType.UNARY,
+    proto_chat_pb.RegisterRequest,
+    proto_chat_pb.RegisterResponse,
+    (request: proto_chat_pb.RegisterRequest) => {
+      return request.serializeBinary();
+    },
+    proto_chat_pb.RegisterResponse.deserializeBinary
+  );
+
+  register(
+    request: proto_chat_pb.RegisterRequest,
+    metadata: grpcWeb.Metadata | null): Promise<proto_chat_pb.RegisterResponse>;
+
+  register(
+    request: proto_chat_pb.RegisterRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: proto_chat_pb.RegisterResponse) => void): grpcWeb.ClientReadableStream<proto_chat_pb.RegisterResponse>;
+
+  register(
+    request: proto_chat_pb.RegisterRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: proto_chat_pb.RegisterResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/chatPackage.Chat/Register',
+        request,
+        metadata || {},
+        this.methodDescriptorRegister,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/chatPackage.Chat/Register',
+    request,
+    metadata || {},
+    this.methodDescriptorRegister);
+  }
+
   methodDescriptorChatInitiate = new grpcWeb.MethodDescriptor(
     '/chatPackage.Chat/ChatInitiate',
     grpcWeb.MethodType.UNARY,
@@ -126,6 +169,71 @@ export class ChatClient {
     this.methodDescriptorSendMessage);
   }
 
+  methodDescriptorcreateRoom = new grpcWeb.MethodDescriptor(
+    '/chatPackage.Chat/createRoom',
+    grpcWeb.MethodType.UNARY,
+    proto_chat_pb.RoomRequest,
+    proto_chat_pb.RoomResponse,
+    (request: proto_chat_pb.RoomRequest) => {
+      return request.serializeBinary();
+    },
+    proto_chat_pb.RoomResponse.deserializeBinary
+  );
+
+  createRoom(
+    request: proto_chat_pb.RoomRequest,
+    metadata: grpcWeb.Metadata | null): Promise<proto_chat_pb.RoomResponse>;
+
+  createRoom(
+    request: proto_chat_pb.RoomRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: proto_chat_pb.RoomResponse) => void): grpcWeb.ClientReadableStream<proto_chat_pb.RoomResponse>;
+
+  createRoom(
+    request: proto_chat_pb.RoomRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: proto_chat_pb.RoomResponse) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/chatPackage.Chat/createRoom',
+        request,
+        metadata || {},
+        this.methodDescriptorcreateRoom,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/chatPackage.Chat/createRoom',
+    request,
+    metadata || {},
+    this.methodDescriptorcreateRoom);
+  }
+
+  methodDescriptorRoomStream = new grpcWeb.MethodDescriptor(
+    '/chatPackage.Chat/RoomStream',
+    grpcWeb.MethodType.SERVER_STREAMING,
+    proto_chat_pb.RoomStreamRequest,
+    proto_chat_pb.RoomStreamResponse,
+    (request: proto_chat_pb.RoomStreamRequest) => {
+      return request.serializeBinary();
+    },
+    proto_chat_pb.RoomStreamResponse.deserializeBinary
+  );
+
+  roomStream(
+    request: proto_chat_pb.RoomStreamRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<proto_chat_pb.RoomStreamResponse> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/chatPackage.Chat/RoomStream',
+      request,
+      metadata || {},
+      this.methodDescriptorRoomStream);
+  }
+
   methodDescriptorUserStream = new grpcWeb.MethodDescriptor(
     '/chatPackage.Chat/UserStream',
     grpcWeb.MethodType.SERVER_STREAMING,
@@ -148,6 +256,28 @@ export class ChatClient {
       this.methodDescriptorUserStream);
   }
 
+  methodDescriptorAllUserStream = new grpcWeb.MethodDescriptor(
+    '/chatPackage.Chat/AllUserStream',
+    grpcWeb.MethodType.SERVER_STREAMING,
+    proto_chat_pb.AllUserRequest,
+    proto_chat_pb.UserStreamResponse,
+    (request: proto_chat_pb.AllUserRequest) => {
+      return request.serializeBinary();
+    },
+    proto_chat_pb.UserStreamResponse.deserializeBinary
+  );
+
+  allUserStream(
+    request: proto_chat_pb.AllUserRequest,
+    metadata?: grpcWeb.Metadata): grpcWeb.ClientReadableStream<proto_chat_pb.UserStreamResponse> {
+    return this.client_.serverStreaming(
+      this.hostname_ +
+        '/chatPackage.Chat/AllUserStream',
+      request,
+      metadata || {},
+      this.methodDescriptorAllUserStream);
+  }
+
   methodDescriptorChatStream = new grpcWeb.MethodDescriptor(
     '/chatPackage.Chat/ChatStream',
     grpcWeb.MethodType.SERVER_STREAMING,
@@ -168,6 +298,49 @@ export class ChatClient {
       request,
       metadata || {},
       this.methodDescriptorChatStream);
+  }
+
+  methodDescriptorLogOut = new grpcWeb.MethodDescriptor(
+    '/chatPackage.Chat/LogOut',
+    grpcWeb.MethodType.UNARY,
+    proto_chat_pb.LogOutRequest,
+    google_protobuf_empty_pb.Empty,
+    (request: proto_chat_pb.LogOutRequest) => {
+      return request.serializeBinary();
+    },
+    google_protobuf_empty_pb.Empty.deserializeBinary
+  );
+
+  logOut(
+    request: proto_chat_pb.LogOutRequest,
+    metadata: grpcWeb.Metadata | null): Promise<google_protobuf_empty_pb.Empty>;
+
+  logOut(
+    request: proto_chat_pb.LogOutRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback: (err: grpcWeb.RpcError,
+               response: google_protobuf_empty_pb.Empty) => void): grpcWeb.ClientReadableStream<google_protobuf_empty_pb.Empty>;
+
+  logOut(
+    request: proto_chat_pb.LogOutRequest,
+    metadata: grpcWeb.Metadata | null,
+    callback?: (err: grpcWeb.RpcError,
+               response: google_protobuf_empty_pb.Empty) => void) {
+    if (callback !== undefined) {
+      return this.client_.rpcCall(
+        this.hostname_ +
+          '/chatPackage.Chat/LogOut',
+        request,
+        metadata || {},
+        this.methodDescriptorLogOut,
+        callback);
+    }
+    return this.client_.unaryCall(
+    this.hostname_ +
+      '/chatPackage.Chat/LogOut',
+    request,
+    metadata || {},
+    this.methodDescriptorLogOut);
   }
 
 }

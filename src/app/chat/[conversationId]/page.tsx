@@ -6,22 +6,25 @@ import EditChatProfile from '@/components/Sidebar/overlays/Members';
 import { useEffect, useState } from 'react';
 
 import {
+    Room,
     StreamMessage,
     StreamRequest,
     User,
 } from '../../../proto-gen/proto/chat_pb';
 import {
     useClientStore,
+    useRoomsStore,
     useStreamMessageStore,
     useUserStore,
 } from '../../../../zustand';
 import { useRouter } from 'next/navigation';
 
-const ChatPage = ({ params }: { params: { conversationId: string } }) => {
+const ChatPage = ({ params }: { params: { conversationId: number } }) => {
     const router = useRouter();
     const [isShowMembers, setIsShowMembers] = useState<boolean>(false);
     const [msgs, setMsgs] = useState<Array<StreamMessage.AsObject>>([]);
     const [user, setUser] = useState<User.AsObject | null>(null);
+    const [room, setRoom] = useState<Room.AsObject | null>(null);
 
     const handleToggleMembers = (): void => {
         setIsShowMembers((prev) => !prev);
@@ -37,10 +40,21 @@ const ChatPage = ({ params }: { params: { conversationId: string } }) => {
     }, []);
 
     useEffect(() => {
+        const rooms = useRoomsStore.getState().rooms;
+        const _room = rooms.find((r) => {
+            return r.id == params.conversationId;
+        });
+        if (_room) setRoom(_room);
+    }, []);
+
+    useEffect(() => {
+        useStreamMessageStore.getState().endStream();
+
         const client = useClientStore.getState().client;
         if (!user || !client) return;
         const req = new StreamRequest();
-        req.setId(user.id);
+        req.setUserId(user.id);
+        req.setRoomId(params.conversationId);
 
         const chatStream = client.chatStream(req, {});
         useStreamMessageStore.setState({ stream: chatStream });
@@ -56,26 +70,33 @@ const ChatPage = ({ params }: { params: { conversationId: string } }) => {
 
     return (
         <div className="background flex max-w-[75vw]">
-            <div className="flex-1 h-full relative flex flex-col">
-                <div className="w-full">
-                    <ChatHeader onShowMembers={handleToggleMembers} />
-                </div>
-                <div className="flex-1">
-                    <div
-                        style={
-                            {
-                                '--input-height': '84px',
-                                height: 'calc(100vh - 56px - var(--input-height))',
-                            } as React.CSSProperties
-                        }
-                    >
-                        <ConversationPanel msgs={msgs} />
+            {room && (
+                <div className="flex-1 h-full relative flex flex-col">
+                    <div className="w-full">
+                        <ChatHeader
+                            room={room}
+                            onShowMembers={handleToggleMembers}
+                        />
+                    </div>
+                    <div className="flex-1">
+                        <div
+                            style={
+                                {
+                                    '--input-height': '84px',
+                                    height: 'calc(100vh - 56px - var(--input-height))',
+                                } as React.CSSProperties
+                            }
+                        >
+                            <ConversationPanel msgs={msgs} />
+                        </div>
+                    </div>
+                    <div>
+                        <div className="mx-auto w-[45.5rem]">
+                            {<ChatInput />}
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <div className="mx-auto w-[45.5rem]">{<ChatInput />}</div>
-                </div>
-            </div>
+            )}
             {isShowMembers && <EditChatProfile onClose={handleToggleMembers} />}
         </div>
     );

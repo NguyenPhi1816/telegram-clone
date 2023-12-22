@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import { MessageRequest, User } from '@/proto-gen/proto/chat_pb';
 import { ChatClient } from '@/proto-gen/proto/ChatServiceClientPb';
 import { useClientStore, useUserStore } from '../../../zustand';
+import { usePathname } from 'next/navigation';
 
 const ChatInput = () => {
+    const pathname = usePathname();
     const [user, setUser] = useState<User.AsObject | null>(null);
     const [client, setClient] = useState<ChatClient | null>(null);
     const [msg, setMsg] = useState<string>('');
@@ -20,9 +22,14 @@ const ChatInput = () => {
     const handleSubmit = () => {
         if (!user || !client || msg.trim() === '') return;
         else {
+            const idStr = pathname.replace('/chat/', '');
+            const conversationId = parseInt(idStr);
+
             const msgReq = new MessageRequest();
-            msgReq.setId(user.id);
+            msgReq.setSenderId(user.id);
+            msgReq.setRoomId(conversationId);
             msgReq.setMessage(msg);
+
             client.sendMessage(msgReq, {}, (err, resp) => {
                 if (err) return console.error(err);
                 return console.log(resp);
