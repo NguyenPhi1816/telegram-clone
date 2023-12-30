@@ -28,10 +28,6 @@ export default function RootLayout({
                     href="/favicon.svg"
                     type="image/svg+xml"
                 ></link>
-                <meta
-                    http-equiv="Content-Security-Policy"
-                    content="upgrade-insecure-requests"
-                />
             </head>
             <body
                 id="root"
