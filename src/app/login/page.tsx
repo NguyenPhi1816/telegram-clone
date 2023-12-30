@@ -16,7 +16,7 @@ const Login = () => {
         const { ChatClient } = await import(
             '../../proto-gen/proto/ChatServiceClientPb'
         );
-        const client = new ChatClient('http://192.168.1.17');
+        const client = new ChatClient('http://192.168.1.17:8080');
         useClientStore.setState({ client: client });
     };
 
