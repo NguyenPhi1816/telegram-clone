@@ -51,6 +51,8 @@ const ChatPage = ({ params }: { params: { conversationId: number } }) => {
         useStreamMessageStore.getState().endStream();
 
         const client = useClientStore.getState().client;
+        console.log(!user, !client);
+
         if (!user || !client) return;
         const req = new StreamRequest();
         req.setUserId(user.id);
@@ -64,6 +66,8 @@ const ChatPage = ({ params }: { params: { conversationId: number } }) => {
         });
 
         return () => {
+            console.log('rerender');
+
             chatStream.cancel();
         };
     }, [user, useClientStore]);

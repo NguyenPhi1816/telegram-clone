@@ -4,25 +4,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import SidebarContactList from '../lists/contactList/SidebarContactList';
-import {
-    useClientStore,
-    useUserStore,
-    useUserStreamStore,
-} from '../../../../zustand';
+import { useClientStore, useUserStore } from '../../../../zustand';
 import {
     AllUserRequest,
-    StreamRequest,
     User,
     UserStreamResponse,
 } from '@/proto-gen/proto/chat_pb';
-import { usePathname } from 'next/navigation';
 
 interface RightSidebarProps {
     onClose: () => void;
 }
 
 const UserList: React.FC<RightSidebarProps> = ({ onClose }) => {
-    const pathname = usePathname();
     const [user, setUser] = useState<User.AsObject | null>(null);
     const [userList, setUserList] = useState<Array<User.AsObject>>([]);
 

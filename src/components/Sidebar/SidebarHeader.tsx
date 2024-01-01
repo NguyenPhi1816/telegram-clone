@@ -15,12 +15,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { useRouter } from 'next/navigation';
 import UserList from './overlays/UserList';
+import MessageDialog from '../dialogs/MessageDialog';
 
 const SidebarHeader = () => {
     const router = useRouter();
     const [user, setUser] = useState<User.AsObject | null>(null);
     const [isShowTooltipMenu, setIsShowTooltipMenu] = useState<boolean>(false);
     const [isShowUserList, setIsShowUserList] = useState<boolean>(false);
+    const [err, setErr] = useState<string>('');
 
     const handleToggleTooltipMenu = (): void => {
         setIsShowTooltipMenu((prev) => !prev);
@@ -37,13 +39,17 @@ const SidebarHeader = () => {
         const req = new LogOutRequest();
         req.setUserId(user.id);
         client.logOut(req, {}, (err) => {
-            if (err) return;
+            if (err) return setErr(err.message);
             useUserStore.setState({ user: null });
             useUserStreamStore.getState().endStream();
             useStreamMessageStore.getState().endStream();
             useRoomStreamStore.getState().endStream();
             router.push('/login');
         });
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     useEffect(() => {
@@ -91,6 +97,13 @@ const SidebarHeader = () => {
                 </div>
             </div>
             {isShowUserList && <UserList onClose={handleToggleUserList} />}
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
+                />
+            )}
         </>
     );
 };

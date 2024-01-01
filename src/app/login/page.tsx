@@ -6,11 +6,13 @@ import Avatar from '../../components/Avatar';
 import Input from '../../components/form/Input';
 import Submit from '../../components/form/Submit';
 import React, { useEffect, useState } from 'react';
+import MessageDialog from '@/components/dialogs/MessageDialog';
 
 const Login = () => {
     const router = useRouter();
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
+    const [err, setErr] = useState<string>('');
 
     const getClient = async () => {
         const { ChatClient } = await import(
@@ -26,16 +28,21 @@ const Login = () => {
 
     const handleUserSubmit = () => {
         const client = useClientStore.getState().client;
-        if (!client || !username || !password) return;
+        if (!client || !username || !password)
+            return setErr('Please enter username and password.');
         const req = new InitiateRequest();
         req.setUsername(username);
         req.setPassword(password);
         client.chatInitiate(req, {}, (err, resp) => {
-            if (err) return console.error(err);
+            if (err) return setErr(err.message);
             const _user = resp?.toObject().user;
             useUserStore.setState({ user: _user });
             router.push('/chat');
         });
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     return (
@@ -63,6 +70,13 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
+                />
+            )}
         </div>
     );
 };

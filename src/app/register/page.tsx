@@ -1,16 +1,12 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import {
-    InitiateRequest,
-    RegisterRequest,
-    Role,
-    Status,
-} from '@/proto-gen/proto/chat_pb';
+import { RegisterRequest, Role, Status } from '@/proto-gen/proto/chat_pb';
 import { useClientStore, useUserStore } from '../../../zustand';
 import Avatar from '../../components/Avatar';
 import Input from '../../components/form/Input';
 import Submit from '../../components/form/Submit';
 import React, { useEffect, useState } from 'react';
+import MessageDialog from '@/components/dialogs/MessageDialog';
 
 const Login = () => {
     const router = useRouter();
@@ -19,6 +15,7 @@ const Login = () => {
     const [password, setPassword] = useState<string>('');
     const [password2, setPassword2] = useState<string>('');
     const [avatar, setAvatar] = useState<string>('https://robohash.org/1.png');
+    const [err, setErr] = useState<string>('');
 
     const getClient = async () => {
         const { ChatClient } = await import(
@@ -35,15 +32,16 @@ const Login = () => {
     const handleUserSubmit = () => {
         const client = useClientStore.getState().client;
         if (!client || !username || !avatar || !password || !password2 || !name)
-            return;
-        if (password !== password2) return;
+            return setErr('Missing user information.');
+        if (password !== password2)
+            return setErr('Password confirmation incorrect.');
         const req = new RegisterRequest();
         req.setName(name.trim());
         req.setAvatarUrl(avatar);
         req.setUsername(username.trim());
         req.setPassword(password);
         client.register(req, {}, (err, resp) => {
-            if (err) return console.error(err);
+            if (err) return setErr(err.message);
             const respObj = resp?.toObject();
             const _user = {
                 id: respObj.id,
@@ -55,6 +53,10 @@ const Login = () => {
             useUserStore.setState({ user: _user });
             router.push('/chat');
         });
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     return (
@@ -96,6 +98,13 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
+                />
+            )}
         </div>
     );
 };

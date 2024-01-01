@@ -5,8 +5,6 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 import { config } from '@fortawesome/fontawesome-svg-core';
 config.autoAddCss = false;
 
-import Sidebar from '@/components/Sidebar/Sidebar';
-
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {

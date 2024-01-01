@@ -3,6 +3,7 @@ import Avatar from '../Avatar';
 import Input from '../form/Input';
 import Submit from '../form/Submit';
 import React, { useState } from 'react';
+import MessageDialog from './MessageDialog';
 
 interface CreateRoomDialogProps {
     onClose: () => void;
@@ -18,13 +19,18 @@ const CreateRoomDialog: React.FC<CreateRoomDialogProps> = ({
     const [imageUrl, setImageUrl] = useState<string>(
         'https://robohash.org/1.png',
     );
+    const [err, setErr] = useState<string>('');
 
     const handleSubmit = () => {
         const _name = name.trim();
         const _desc = description.trim();
         if (!_name || !_desc)
-            return console.error(new Error('Missing information.'));
+            return setErr(new Error('Missing information.').message);
         else return onSubmit(_name, _desc, imageUrl);
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     const dialog = (
@@ -58,6 +64,13 @@ const CreateRoomDialog: React.FC<CreateRoomDialogProps> = ({
                     </form>
                 </div>
             </div>
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
+                />
+            )}
         </div>
     );
     return createPortal(dialog, document.getElementById('root')!);

@@ -7,12 +7,14 @@ import { MessageRequest, User } from '@/proto-gen/proto/chat_pb';
 import { ChatClient } from '@/proto-gen/proto/ChatServiceClientPb';
 import { useClientStore, useUserStore } from '../../../zustand';
 import { usePathname } from 'next/navigation';
+import MessageDialog from '../dialogs/MessageDialog';
 
 const ChatInput = () => {
     const pathname = usePathname();
     const [user, setUser] = useState<User.AsObject | null>(null);
     const [client, setClient] = useState<ChatClient | null>(null);
     const [msg, setMsg] = useState<string>('');
+    const [err, setErr] = useState<string>('');
 
     useEffect(() => {
         setUser(useUserStore.getState().user);
@@ -20,7 +22,8 @@ const ChatInput = () => {
     }, []);
 
     const handleSubmit = () => {
-        if (!user || !client || msg.trim() === '') return;
+        if (!user || !client || msg.trim() === '')
+            return setErr('Please enter message.');
         else {
             const idStr = pathname.replace('/chat/', '');
             const conversationId = parseInt(idStr);
@@ -31,11 +34,15 @@ const ChatInput = () => {
             msgReq.setMessage(msg);
 
             client.sendMessage(msgReq, {}, (err, resp) => {
-                if (err) return console.error(err);
+                if (err) return setErr(err.message);
                 return console.log(resp);
             });
             setMsg('');
         }
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     return (
@@ -56,6 +63,13 @@ const ChatInput = () => {
                     <FontAwesomeIcon icon={faPaperPlane} />
                 </button>
             </div>
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
+                />
+            )}
         </div>
     );
 };

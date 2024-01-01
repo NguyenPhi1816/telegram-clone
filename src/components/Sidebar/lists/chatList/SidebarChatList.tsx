@@ -19,12 +19,14 @@ import {
     useUserStore,
 } from '../../../../../zustand';
 import CreateRoomDialog from '@/components/dialogs/CreateRoomDialog';
+import MessageDialog from '@/components/dialogs/MessageDialog';
 
 const SidebarChatList = () => {
     const pathName = usePathname();
     const [user, setUser] = useState<User.AsObject | null>();
     const [rooms, setRooms] = useState<Array<Room.AsObject>>([]);
     const [isShowDialog, setIsShowDialog] = useState<boolean>(false);
+    const [err, setErr] = useState<string>('');
 
     useEffect(() => {
         setUser(useUserStore.getState().user);
@@ -61,20 +63,23 @@ const SidebarChatList = () => {
         _imageUrl: string,
     ) => {
         const client = useClientStore.getState().client;
-        console.log(client, user, _name, _desc, _imageUrl);
         if (!client || !user || !_name || !_desc || !_imageUrl)
-            return console.error(new Error('Creating room failed'));
+            return setErr(new Error('Creating room failed').message);
         const req = new RoomRequest();
         req.setName(_name);
         req.setDescription(_desc);
         req.setImageurl(_imageUrl);
         req.setUserId(user.id);
         client.createRoom(req, {}, (err, resp) => {
-            if (err) return console.error(err);
+            if (err) return setErr(err.message);
             const respObj = resp?.toObject();
             console.log(`Room with id: ${respObj.id} was created`);
             setIsShowDialog(false);
         });
+    };
+
+    const handleCloseDialog = () => {
+        setErr('');
     };
 
     return (
@@ -106,6 +111,13 @@ const SidebarChatList = () => {
                 <CreateRoomDialog
                     onClose={handleToggleDialog}
                     onSubmit={handleCreateRoom}
+                />
+            )}
+            {err && (
+                <MessageDialog
+                    title="Something went wrong"
+                    message={err}
+                    onClose={handleCloseDialog}
                 />
             )}
         </div>

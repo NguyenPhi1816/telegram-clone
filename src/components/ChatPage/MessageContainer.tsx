@@ -1,6 +1,4 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ChatAppendix from '../Icon/ChatAppendix';
-import { faCheck, faCheckDouble } from '@fortawesome/free-solid-svg-icons';
 import { StreamMessage } from '@/proto-gen/proto/chat_pb';
 import Avatar from '../Avatar';
 
