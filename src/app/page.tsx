@@ -15,7 +15,7 @@ export default function Home() {
                         href={'/register'}
                         className="input w-1/2 bg-primary flex justify-center items-center"
                     >
-                        <span className="font-bold">Sign In</span>
+                        <span className="font-bold">Register</span>
                     </Link>
                     <span className="w-4"></span>
                     <Link
